@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#make the font size for plotting very large
+plt.rcParams.update({'font.size': 22})
+
 #write variables for gravity, drag coefficent, and launch angle
 gravity = 9.8
 drag_coefficient = 0.5
@@ -40,6 +43,11 @@ if __name__ == '__main__':
     #plot_trajectory(initial_velocity, launch_angle, gravity, drag_coefficient)
     
     # make a plot of the distance as a function of launch angle
-    launch_angle = 45
-    landing_spot = projectile_distance(initial_velocity, launch_angle, gravity, drag_coefficient)
-    print('Launching at ', launch_angle, ' will land at ', landing_spot, 'meters.')
+    launch_angles = np.linspace(0,90, 100)
+    distances = [projectile_distance(initial_velocity, angle, gravity, drag_coefficient) for angle in launch_angles]
+    plt.figure(figsize=(16, 12))
+    plt.plot(launch_angles, distances)
+    plt.xlabel('Launch Angle (degrees)')
+    plt.ylabel('Distance (m)')
+    plt.title('Projectile Distance vs Launch Angle')
+    plt.show()
